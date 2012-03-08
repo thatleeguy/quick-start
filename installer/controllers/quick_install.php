@@ -58,7 +58,6 @@ class Quick_install extends CI_Controller
 			'* PyroCMS has installed successfully! '.PHP_EOL.
 			'* You may login to your new installation at http://'.$_SERVER['HTTP_HOST'].PHP_EOL.
 			'* The default email is "default@site.com" and the password is "password". Change this promptly!'.PHP_EOL.
-			'* Remember: delete the installer directory and commit before your next Git push or PyroCMS will re-install!'.PHP_EOL.
 			'* '.PHP_EOL.
 			'*************************************************************'.PHP_EOL.
 			PHP_EOL;

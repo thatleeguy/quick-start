@@ -1,0 +1,6 @@
+web1:
+
+  after_deploy:
+
+    # The database connection is set up in the main Boxfile, so run the installer
+    - "curl -s http://${APP_NAME}.pagodabox.com/installer/index.php/quick_install"

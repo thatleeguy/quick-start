@@ -1,43 +1,16 @@
 web1:
+  name: 'pyrocms'
 
-  ################################################
-  ## GENERAL SETTINGS
-  ################################################
+  # Directories specified here are not managed by Git but rather via SSH or the PyroCMS interface
   shared_writable_dirs: [/system/cms/cache, /system/cms/logs, /uploads, /addons]
 
-  ################################################
-  ## WEB SPECIFIC SETTINGS
-  ################################################
-  index_list: [index.php]
 
-  ################################################
-  ## After Build Hook
-  ################################################
-  after_build:
-
-    # If we don't have a database config file yet then we'll copy the one from installer/assets
-    - "[ -f 'system/cms/config/database.php' ] || mv 'installer/assets/config/dynamic_database.php' 'system/cms/config/database.php'"
-
-    # Since we know Pagoda Box loads mod_rewrite we get rid of the index.php in the url on every install
-    - "sed -i \"s/'index.php'/''/g\" system/cms/config/config.php"
-
-  ################################################
-  ## After Deploy Hook
-  ################################################
-  after_deploy:
-
-    # All files are in place and the database connection is ready. Run the install
-    - "curl -s http://${APP_NAME}.pagodabox.com/installer/index.php/quick_install"
-
-  ################################################
-  ## PHP SPECIFIC SETTINGS
-  ################################################
-  php_extensions: [mysql, curl, gd, mbstring]
+  # PHP Config Overrides
+  php_extensions: [mysqli, curl, gd, mbstring]
   php_error_reporting: 'E_ALL'
   php_display_errors: On
   php_short_open_tag: Off
   php_default_mimetype: text/html
-  php_date_timezone: Europe/London
   php_max_execution_time: 30
   php_max_input_time: 60
   php_post_max_size: 25M
@@ -47,3 +20,7 @@ web1:
 
 db1:
   name: 'site'
+
+global:
+  env:
+    - PYRO_ENV: development
